@@ -1,0 +1,15 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    font-weight: bold;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.clock {
+    float: right;
+}
