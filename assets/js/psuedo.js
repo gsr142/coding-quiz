@@ -21,3 +21,4 @@
 //Q and A box will serve as welcome screen before user starts quiz.
 //use CSS to style the elements. Nothing Fancy, just clean.
 //use js to create timer
+//add quiz questions and answers using js
