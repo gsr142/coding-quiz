@@ -86,7 +86,7 @@ function displayQuestion () {
     document.getElementById("button1"),
     document.getElementById("button2"),
     document.getElementById("button3"),
-    document.getElementById("button4"),
+    document.getElementById("button4")
   ];
 
   questionElement.textContent = currentQuestion.question;
@@ -97,11 +97,31 @@ function displayQuestion () {
   }
 }
 
-//test function to make sure the buttons do something
-function answerCounter () {
-  console.log("run away");
+//adds points to score when user answers correctly.
+function answerCounter (click) {
+  var userAnswer = click.target;
+  var currentQuestion = quiz[questionIndex];
+  if (userAnswer.id === `choice${currentQuestion.correct + 1}`){
+    score++;
+    console.log(score)
+  }
+
+  questionIndex++;
+
+  //Check to see if there are any more questions, and if any time remains.
+  if (questionIndex < quiz.length && timeLeft > 0) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
 }
 
+function endQuiz() {
+  var questionElement = document.getElementById("questions");
+  questionElement.textContent = `All done! You scored ${score}. Enter your name to see the leader board.`;
+}
+
+displayQuestion()
 
 //var question1 = document.createElement("h2")
 //question1.textContent = "Which symbol is used to denote HTML tags?";  
