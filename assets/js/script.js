@@ -1,6 +1,6 @@
 var body = document.body;
 var clock = document.querySelector(".clock");
-var quiz = document.querySelector(".quiz");
+var quizBox = document.querySelector(".quiz");
 var questions = document.querySelector(".questions")
 var answers = document.querySelector(".answers")
 
@@ -34,17 +34,17 @@ welcome.textContent = "Welcome to the Full Stack Code quiz!";
 var welcome2 = document.createElement("h2")
 welcome2.textContent = "Answer the questions before time runs out. Be careful, wrong answers recieve a time penalty. Compete with your friends, coworkers, or even yourself."
 var lineBreak = document.createElement("br")
-quiz.appendChild(welcome);
-quiz.appendChild(lineBreak);
-quiz.appendChild(lineBreak);
-quiz.appendChild(welcome2);
-quiz.appendChild(startButton);
+//quiz.appendChild(welcome);
+//quiz.appendChild(lineBreak);
+//quiz.appendChild(lineBreak);
+//quiz.appendChild(welcome2);
+//quiz.appendChild(startButton);
 
 
 
 
 
-startButton.addEventListener("click", console.log('hello'))
+//startButton.addEventListener("click", console.log('hello'))
 
 
 
@@ -60,6 +60,48 @@ function setTime() {
       } 
     }, 1000);
   }
+//begins the questions at index 0
+let questionIndex = 0;
+//sets beginning score to 0
+let score = 0;
+//question and answer array. correct shows the index of the correct answer.
+var quiz = [
+  {
+    question: "Which symbol is used to denote HTML tags",
+    choices: ['<>', '{}', '[]', "::"],
+    correct: 0
+  },
+  {
+    question: "Which programming language is used to build the basic framework of a web page?",
+    choices: ['JavaScript', 'HTML', 'CSS', 'Python'],
+    correct : 1
+  }
+]
+
+
+function displayQuestion () {
+  var currentQuestion = quiz[questionIndex];
+  var questionElement = document.getElementById("questions")
+  var choiceElements = [
+    document.getElementById("button1"),
+    document.getElementById("button2"),
+    document.getElementById("button3"),
+    document.getElementById("button4"),
+  ];
+
+  questionElement.textContent = currentQuestion.question;
+
+  for (let i = 0; i < currentQuestion.choices.length; i++) {
+    choiceElements[i].textContent = currentQuestion.choices[i];
+    choiceElements[i].addEventListener("click", answerCounter);
+  }
+}
+
+//test function to make sure the buttons do something
+function answerCounter () {
+  console.log("run away");
+}
+
 
 //var question1 = document.createElement("h2")
 //question1.textContent = "Which symbol is used to denote HTML tags?";  
