@@ -1,82 +1,48 @@
+//declare global variables. Not completed in this order
 var body = document.body;
 var clock = document.querySelector(".clock");
-var quizBox = document.querySelector(".quiz");
 var questions = document.querySelector(".questions")
-var answers = document.querySelector(".answers")
 
 //create start button
 var startButton = document.createElement("button");
 startButton.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
 startButton.textContent = "Begin quiz";
-//commenting our a bunch of stuff to try a different approach. what I was doing wasnt working and got me stuck. decided to do more of what I know.
-//Create answer buttons
-//var button1 = document.createElement("button");
-//button1.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
-
-//var button2 = document.createElement("button");
-//button2.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
-
-//var button3 = document.createElement("button");
-//button3.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
-
-//var button4 = document.createElement("button");
-//button4.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
-
-//create answer button array
-//answerButtons = [button1, button2, button3, button4]
-
-
+// sets time limit for quiz
 var timeLeft = 20;
-
-//set up welcome screen with start button
-var welcome = document.createElement("h1");
-welcome.textContent = "Welcome to the Full Stack Code quiz!";
-var welcome2 = document.createElement("h2")
-welcome2.textContent = "Answer the questions before time runs out. Be careful, wrong answers recieve a time penalty. Compete with your friends, coworkers, or even yourself."
-var lineBreak = document.createElement("br")
-//quiz.appendChild(welcome);
-//quiz.appendChild(lineBreak);
-//quiz.appendChild(lineBreak);
-//quiz.appendChild(welcome2);
-//quiz.appendChild(startButton);
-
-
-
-
-
-//startButton.addEventListener("click", console.log('hello'))
-
-
-
-//shows the time remaining in the upper right corner
-//this part still works. for now.
-function setTime() {
-    
-    var timerInterval = setInterval(function() {
-      timeLeft--; //decrements time left by 1, every 1000ms
-      clock.textContent = "You have " + timeLeft + " seconds remaining"; //displays time remaining 
-      if(timeLeft === 0) {
-        clearInterval(timerInterval);
-      } 
-    }, 1000);
-  }
 //begins the questions at index 0
 let questionIndex = 0;
-//sets beginning score to 0
+
 let score = 0;
 //question and answer array. correct shows the index of the correct answer.
 var quiz = [
   {
     question: "Which symbol is used to denote HTML tags",
     choices: ['<>', '{}', '[]', "::"],
-    correct: 0
+    correctAnswer: '<>'
   },
   {
     question: "Which programming language is used to build the basic framework of a web page?",
     choices: ['JavaScript', 'HTML', 'CSS', 'Python'],
-    correct : 1
-  }
-]
+    correctAnswer : 'HTML'
+  },
+];
+
+//Functions
+
+//shows the time remaining in the upper right corner
+//this part still works. for now.
+function setTime() {  
+  var timerInterval = setInterval(function() {
+    timeLeft--; //decrements time left by 1, every 1000ms
+    clock.textContent = "You have " + timeLeft + " seconds remaining"; //displays time remaining 
+    if(timeLeft === 0) {
+      clearInterval(timerInterval);
+    } 
+  }, 1000);
+}
+
+//sets beginning score to 0
+
 
 
 function displayQuestion () {
@@ -95,21 +61,35 @@ function displayQuestion () {
     choiceElements[i].textContent = currentQuestion.choices[i];
     choiceElements[i].addEventListener("click", answerCounter);
   }
+  
 }
 
 //adds points to score when user answers correctly.
-function answerCounter (click) {
-  var userAnswer = click.target;
+function answerCounter (event) {
+  var userAnswer = event.target;
   var currentQuestion = quiz[questionIndex];
-  if (userAnswer.id === `choice${currentQuestion.correct + 1}`){
+  if (userAnswer.id === `choice${currentQuestion.correctAnswer + 1}`){
     score++;
-    console.log(score)
   }
+  
+  var choiceElements = [
+    document.getElementById("button1"),
+    document.getElementById("button2"),
+    document.getElementById("button3"),
+    document.getElementById("button4")
+  ];
 
+  //for (i = 0; i < choiceElements.length; i++) {
+    //choiceElements[i].removeEventListener("click", answerCounter)
+  //}
+  console.log(document.getElementById("button1"))
+  console.log(document.getElementById("button2"))
+  console.log(document.getElementById("button3"))
+  console.log(document.getElementById("button4"))
   questionIndex++;
 
   //Check to see if there are any more questions, and if any time remains.
-  if (questionIndex < quiz.length && timeLeft > 0) {
+  if (questionIndex < quiz.length) {
     displayQuestion();
   } else {
     endQuiz();
@@ -121,47 +101,16 @@ function endQuiz() {
   questionElement.textContent = `All done! You scored ${score}. Enter your name to see the leader board.`;
 }
 
-displayQuestion()
+function start(){
+  var quizbox = document.getElementById("questions")
+  quizbox.appendChild(startButton)
+  startButton.addEventListener("click", displayQuestion)
+}
 
-//var question1 = document.createElement("h2")
-//question1.textContent = "Which symbol is used to denote HTML tags?";  
-//var question1Answers = ['<>', '{}', '[]', "::"];
-
-//var question2 = document.createElement("h2")
-//question2.textContent = "Which programming language is used to build the basic framework of a web page?";
-//var question2Answers = ['JavaScript', 'HTML', 'CSS', 'Python']
-
-//function answersToButtons (answers) {
-  //for (let i=0; i < answerButtons.length; i++) {
-    //for (let j = 0; j < answers.length; j++) {
-      //answerButtons[i].textContent = answers[i]
-    //}
-  //}
-//}
-
-//function postNewQuestion (question, answerKey) {
-  //questions.appendChild(question);
-  //answersToButtons(answerKey);
-  //answers.appendChild(button1);
-  //answers.appendChild(button2);
-  //answers.appendChild(button3);
-  //answers.appendChild(button4);
-//}
-
-//clears element of child elements. used to switch questions
-//function clearElements (element){
-  //while  (element.firstElementChild) {
-    //element.firstElementChild.remove();
-  //}
-//}
+start()
 
 
-//function runQuiz () {
-  //clearElements(quiz);
-  //setTime();
-  //postNewQuestion(question1, question1Answers)
-  
-//}
+
 
 
 
