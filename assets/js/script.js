@@ -8,7 +8,7 @@ var h2 = document.createElement("h2");
 h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin."
 //create start button
 var startButton = document.createElement("button");
-startButton.setAttribute("style", "width: 60%; background: gray; color: white; margin-left: 20%");
+startButton.setAttribute("style", "background: gray; color: white;");
 startButton.appendChild(h1)
 startButton.appendChild(h2)
 
@@ -91,7 +91,6 @@ function displayQuestion () {
 
     for (let i = 0; i < currentQuestion.choices.length; i++) {
       choiceElements[i].innerHTML = currentQuestion.choices[i];
-      console.log(choiceElements)
       choiceElements[i].addEventListener("click", answerCounter);
     }
     
@@ -115,10 +114,7 @@ function answerCounter (event) {
     //for (i = 0; i < choiceElements.length; i++) {
       //choiceElements[i].removeEventListener("click", answerCounter)
     //}
-    console.log(document.getElementById("button1"))
-    console.log(document.getElementById("button2"))
-    console.log(document.getElementById("button3"))
-    console.log(document.getElementById("button4"))
+
     questionIndex++;
 
     //Check to see if there are any more questions, and if any time remains.

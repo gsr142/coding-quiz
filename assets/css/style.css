@@ -27,13 +27,12 @@ h2{
     float: right;
 }
 
-.quiz {
+.quizBox {
     position: absolute;
     display: block;
     width: 60%;
     margin-left: 20%;
     align-self: center;
-    color: black;
     text-align: center;
 }
 
