@@ -22,3 +22,10 @@
 //use CSS to style the elements. Nothing Fancy, just clean.
 //use js to create timer
 //add quiz questions and answers using js
+//start quiz function: make functional
+//tie in clock to startQuiz
+//end quiz function: make functional
+//highscores page
+//log top ten scores
+
+
