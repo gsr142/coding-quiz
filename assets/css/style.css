@@ -23,6 +23,13 @@ h2{
     font-size: 125%;
 }
 
+button {
+    width:fit-content;
+    border: none;
+    background-color: lightcyan;
+    margin: 1px 0 1px 0;
+}
+
 .clock {
     float: right;
 }

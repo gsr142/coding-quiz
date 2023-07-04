@@ -8,7 +8,7 @@ var h2 = document.createElement("h2");
 h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin.";
 //create start button
 var startButton = document.createElement("button");
-startButton.setAttribute("style", "background: gray; color: white;");
+startButton.setAttribute("style", "background: lightcyan; color: black;");
 startButton.appendChild(h1);
 startButton.appendChild(h2);
 
@@ -96,6 +96,7 @@ function displayQuestion () {
 
     for (let i = 0; i < currentQuestion.choices.length; i++) {
       choiceElements[i].innerHTML = currentQuestion.choices[i];
+      choiceElements[i].setAttribute("style", "border: black 1px");
       choiceElements[i].addEventListener("click", answerCounter);
     }
     
@@ -116,9 +117,9 @@ function answerCounter (event) {
       document.getElementById("button4")
     ];
 
-    //for (i = 0; i < choiceElements.length; i++) {
-      //choiceElements[i].removeEventListener("click", answerCounter)
-    //}
+    for (i = 0; i < choiceElements.length; i++) {
+      choiceElements[i].removeEventListener("click", answerCounter)
+    }
 
     questionIndex++;
 
