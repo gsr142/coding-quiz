@@ -1,12 +1,18 @@
 //declare global variables. Not completed in this order
 var body = document.body;
 var clock = document.querySelector(".clock");
-var questions = document.querySelector(".questions")
-
+var questions = document.querySelector(".questions");
+var h1 = document.createElement("h1");
+h1.textContent = "Welcome to the Full Stack Code Quiz!"
+var h2 = document.createElement("h2");
+h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin."
 //create start button
 var startButton = document.createElement("button");
-startButton.setAttribute("style", "font-size: 16px; background: blue; color: white; margin: 5px");
-startButton.textContent = "Begin quiz";
+startButton.setAttribute("style", "width: 60%; background: gray; color: white; margin-left: 20%");
+startButton.appendChild(h1)
+startButton.appendChild(h2)
+
+//startButton.textContent = "Begin quiz";
 // sets time limit for quiz
 let timeLeft = 20;
 //begins the questions at index 0
