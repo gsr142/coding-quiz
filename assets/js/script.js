@@ -72,8 +72,9 @@ function setTime() {
     var timerInterval = setInterval(function() {
       timeLeft--; //decrements time left by 1, every 1000ms
       clock.textContent = "You have " + timeLeft + " seconds remaining"; //displays time remaining 
-      if(timeLeft === 0) {
+      if(timeLeft < 1) {
         clearInterval(timerInterval);
+        endQuiz();
       } 
     }, 1000);
   }
@@ -140,11 +141,16 @@ function endQuiz() {
     //enterButton.addEventListener("click", highScores)
   }
 
+function syncTimer() {
+  setTime();
+  displayQuestion();
+}
 
 function start(){
     var quizbox = document.getElementById("questions")
     quizbox.appendChild(startButton)
-    startButton.addEventListener("click", displayQuestion)
+    startButton.addEventListener("click", syncTimer);
+    
   }
 
 start()
