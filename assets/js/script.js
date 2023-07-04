@@ -5,14 +5,19 @@ var questions = document.querySelector(".questions");
 var h1 = document.createElement("h1");
 h1.textContent = "Welcome to the Full Stack Code Quiz!"
 var h2 = document.createElement("h2");
-h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin."
+h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin.";
 //create start button
 var startButton = document.createElement("button");
 startButton.setAttribute("style", "background: gray; color: white;");
-startButton.appendChild(h1)
-startButton.appendChild(h2)
+startButton.appendChild(h1);
+startButton.appendChild(h2);
 
-//startButton.textContent = "Begin quiz";
+var nameInput = document.createElement("input");
+nameInput.setAttribute("type", "text");
+nameInput.setAttribute("id", "input");
+nameInput.setAttribute("style", "width: 50%; margin-right: 50%; margin-bottom: 3px");
+var enterButton = document.createElement("button");
+enterButton.textContent = "OK";
 // sets time limit for quiz
 let timeLeft = 20;
 //begins the questions at index 0
@@ -127,8 +132,13 @@ function answerCounter (event) {
 
 function endQuiz() {
     var questionElement = document.getElementById("questions");
-    questionElement.textContent = `All done! You scored ${score}. Enter your name to see the leader board.`;
+    questionElement.textContent = `All done! You scored ${score}. Enter your name or just click OK to see the leader board.`;
+    document.getElementById("answers").setAttribute("style", "display: none");
+    questionElement.appendChild(nameInput);
+    questionElement.appendChild(enterButton);
+    //enterButton.addEventListener("click", highScores)
   }
+
 
 function start(){
     var quizbox = document.getElementById("questions")

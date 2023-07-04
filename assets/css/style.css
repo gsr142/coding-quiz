@@ -39,6 +39,7 @@ h2{
 #questions {
     width: 100%;
     text-align: left;
+    display: block;
 }
 
 #answers {
