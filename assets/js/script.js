@@ -2,6 +2,7 @@
 var body = document.body;
 var clock = document.querySelector(".clock");
 var questions = document.querySelector(".questions");
+//text for the start button
 var h1 = document.createElement("h1");
 h1.textContent = "Welcome to the Full Stack Code Quiz!"
 var h2 = document.createElement("h2");
@@ -29,37 +30,37 @@ var quiz = [
     {
       question: "Which programming language is used to build the basic framework of a web page?",
       choices: ["JavaScript", "HTML", "CSS", "Python"],
-      correctAnswer: 1
+      correctAnswer: "button2"
     },
     {
       question: "Which pogramming language is used to add style elements like fonts, colors, and sizing to a webpage?",
       choices: ["JavaScript", "HTML", "CSS", "Python"],
-      correctAnswer: 2
+      correctAnswer: "button3"
     },
     {
       question: "Which element is not a proper CSS selector?",
       choices: ["#footer", "footer", "%footer", ".footer"],
-      correctAnswer: 2
+      correctAnswer: "button3"
     },
     {
       question: "Which element is a Class Selector?",
       choices: ["#footer", "footer", "%footer", ".footer"],
-      correctAnswer: 3
+      correctAnswer: "button4"
     },
     {
       question: "Which element is an ID Selector?",
       choices: ["#footer", "footer", "%footer", ".footer"],
-      correctAnswer: 0
+      correctAnswer: "button1"
     },
     {
       question: "Which language is used to add interactivity to a webpage built with HTML?",
       choices: ["CSS", "JavaScript", "R", "Kotlin"],
-      correctAnswer: 1
+      correctAnswer: "button2"
     },
     {
       question: "Which of the following is the preferred declaration of a JavaScript variable that will never change?",
       choices: ["var x = 1", "const x = 1", "x = 1", "let x = 1"],
-      correctAnswer: 1
+      correctAnswer: "button2"
     },
     
   ];
@@ -106,8 +107,9 @@ function displayQuestion () {
 //adds points to score when user answers correctly.
 function answerCounter (event) {
     var userAnswer = event.target;
+    //console.log(userAnswer.id)
     var currentQuestion = quiz[questionIndex];
-    if (userAnswer.id === `choices${currentQuestion.correctAnswer + 1}`){
+    if (userAnswer.id === currentQuestion.correctAnswer){
       score++;
     }
     
@@ -119,7 +121,7 @@ function answerCounter (event) {
     ];
 
     for (i = 0; i < choiceElements.length; i++) {
-      choiceElements[i].removeEventListener("click", answerCounter)
+      choiceElements[i].removeEventListener("click", answerCounter);
     }
 
     questionIndex++;
@@ -134,7 +136,7 @@ function answerCounter (event) {
 
 function endQuiz() {
     var questionElement = document.getElementById("questions");
-    questionElement.textContent = `All done! You scored ${score}. Enter your name or just click OK to see the leader board.`;
+    questionElement.textContent = `All done! You scored ${score} out of 7. Enter your name or just click OK to see the leader board.`;
     document.getElementById("answers").setAttribute("style", "display: none");
     questionElement.appendChild(nameInput);
     questionElement.appendChild(enterButton);
