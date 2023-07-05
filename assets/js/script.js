@@ -111,7 +111,10 @@ function answerCounter (event) {
     var currentQuestion = quiz[questionIndex];
     if (userAnswer.id === currentQuestion.correctAnswer){
       score++;
+    } else {
+      timeLeft = timeLeft - 5
     }
+    
     
     var choiceElements = [
       document.getElementById("button1"),
