@@ -33,8 +33,11 @@ var choiceElements = [
 
 var playAgain = document.createElement("button");
 playAgain.textContent = "Play Again"
+playAgain.addEventListener("click", reload)
 
-
+function reload() {
+  location.reload()
+}
 // sets time limit for quiz
 let timeLeft = 20;
 //begins the questions at index 0
@@ -125,7 +128,7 @@ function answerCounter (event) {
     }
     // Moves on to the next question
     questionIndex++;
-
+    
     //Check to see if there are any more questions, and if any time remains.
     if (questionIndex < quiz.length) {
       displayQuestion();
@@ -143,6 +146,7 @@ function endQuiz() {
     questionElement.appendChild(enterButton); 
     enterButton.addEventListener("click", showHighScores)
     questionElement.appendChild(playAgain)
+    
   }
 
   // Syncs the timer with the question display
@@ -166,7 +170,8 @@ function start(){
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
 function addScore (userName, userScore) {
   leaderboard.push({userName, userScore});
-  
+  leaderboard.sort((a, b) => b.userScore - a.userScore);
+  leaderboard = leaderboard.slice(0, 10);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
   enterButton.removeEventListener("click", showHighScores);
 }
