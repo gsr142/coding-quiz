@@ -1,7 +1,7 @@
 //declare global variables. Not completed in this order
 var body = document.body;
 var clock = document.querySelector(".clock");
-var questions = document.querySelector(".questions");
+var questionElement = document.getElementById("questions");
 //text for the start button
 var h1 = document.createElement("h1");
 h1.textContent = "Welcome to the Full Stack Code Quiz!"
@@ -138,12 +138,12 @@ function answerCounter (event) {
   }
 
 function endQuiz() {
-    var questionElement = document.getElementById("questions");
-    questionElement.textContent = `All done! You scored ${score} out of 7. Enter your name or just click OK to see the leader board.`;
+    
+    questionElement.textContent = `All done! You scored ${score} out of 7. Enter your name and click OK to see the leader board.`;
     document.getElementById("answers").setAttribute("style", "display: none");
     questionElement.appendChild(nameInput);
-    questionElement.appendChild(enterButton);
-    //enterButton.addEventListener("click", highScores)
+    questionElement.appendChild(enterButton); 
+    enterButton.addEventListener("click", showHighScores)
   }
 
 function syncTimer() {
@@ -160,8 +160,48 @@ function start(){
 
 start()
 
+let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+function addScore (userName, userScore) {
+  leaderboard.push({userName, userScore});
+  
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
 
 
+function displayScores() {
+
+  var leaderboardElement = document.getElementById("highScores");
+
+  //leaderboardElement.innerHTML = "";
+
+  leaderboard.forEach((entry, index) => {
+    var row = document.createElement("tr");
+
+    var rankCell = document.createElement('td');
+    rankCell.textContent = index + 1;
+    row.appendChild(rankCell);
+    
+    var usernameCell = document.createElement("td");
+    usernameCell.textContent = entry.userName;
+    row.appendChild(usernameCell);
+
+    var scoreCell = document.createElement("td");
+    scoreCell.textContent = entry.userScore;
+    row.appendChild(scoreCell);
+
+    leaderboardElement.appendChild(row);
+  });
+  
+  enterButton.removeEventListener("click", showHighScores);
+  var table = document.getElementById("table");
+  table.setAttribute("style", "display: table");
+  
+}
+
+function showHighScores() {
+  addScore(nameInput.value, score);
+  displayScores();
+}
 
 
 

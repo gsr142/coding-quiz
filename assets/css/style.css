@@ -23,11 +23,20 @@ h2{
     font-size: 125%;
 }
 
+h3{
+    font-size: 100%;
+    font-weight: bold;
+}
+
 button {
     width:fit-content;
     border: none;
     background-color: lightcyan;
     margin: 1px 0 1px 0;
+}
+
+tr {
+    width: 20%;
 }
 
 .clock {
@@ -55,3 +64,9 @@ button {
     float: left;
     align-items: start;
 }
+
+table {
+    display: none;
+}
+
+
