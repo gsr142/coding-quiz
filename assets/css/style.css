@@ -35,6 +35,10 @@ button {
     margin: 1px 15px 1px 0;
 }
 
+button:hover {
+    box-shadow: 0 0 2px 2px purple;
+}
+
 tr {
     width: 20%;
 }
