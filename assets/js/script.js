@@ -7,18 +7,30 @@ var h1 = document.createElement("h1");
 h1.textContent = "Welcome to the Full Stack Code Quiz!"
 var h2 = document.createElement("h2");
 h2.textContent = "Test your knowledge of the tools used for full stack web develpment. Click anywhere in this box to begin.";
+document.getElementById("showScoresButton").addEventListener("click", displayScores)
+
 //create start button
 var startButton = document.createElement("button");
 startButton.setAttribute("style", "background: lightcyan; color: black;");
 startButton.appendChild(h1);
 startButton.appendChild(h2);
 
+//create input box and button to enter name for leaderboard
 var nameInput = document.createElement("input");
 nameInput.setAttribute("type", "text");
 nameInput.setAttribute("id", "input");
 nameInput.setAttribute("style", "width: 50%; margin-right: 50%; margin-bottom: 3px");
 var enterButton = document.createElement("button");
 enterButton.textContent = "OK";
+
+//create answer button array
+var choiceElements = [
+  document.getElementById("button1"),
+  document.getElementById("button2"),
+  document.getElementById("button3"),
+  document.getElementById("button4")
+];
+
 // sets time limit for quiz
 let timeLeft = 20;
 //begins the questions at index 0
@@ -80,20 +92,10 @@ function setTime() {
     }, 1000);
   }
 
-//sets beginning score to 0
-
-
-
+//displays current question with matching answer buttons
 function displayQuestion () {
     var currentQuestion = quiz[questionIndex];
     var questionElement = document.getElementById("questions")
-    var choiceElements = [
-      document.getElementById("button1"),
-      document.getElementById("button2"),
-      document.getElementById("button3"),
-      document.getElementById("button4")
-    ];
-
     questionElement.textContent = currentQuestion.question;
 
     for (let i = 0; i < currentQuestion.choices.length; i++) {
@@ -101,10 +103,9 @@ function displayQuestion () {
       choiceElements[i].setAttribute("style", "border: black 1px");
       choiceElements[i].addEventListener("click", answerCounter);
     }
-    
   }
 
-//adds points to score when user answers correctly.
+//adds points to score when user answers correctly, time remaining is reduced with an incorrect answer
 function answerCounter (event) {
     var userAnswer = event.target;
     //console.log(userAnswer.id)
@@ -115,18 +116,10 @@ function answerCounter (event) {
       timeLeft = timeLeft - 5
     }
     
-    
-    var choiceElements = [
-      document.getElementById("button1"),
-      document.getElementById("button2"),
-      document.getElementById("button3"),
-      document.getElementById("button4")
-    ];
-
     for (i = 0; i < choiceElements.length; i++) {
       choiceElements[i].removeEventListener("click", answerCounter);
     }
-
+    // Moves on to the next question
     questionIndex++;
 
     //Check to see if there are any more questions, and if any time remains.
@@ -137,6 +130,7 @@ function answerCounter (event) {
     }
   }
 
+  // Display finishing message and input box for user initials
 function endQuiz() {
     
     questionElement.textContent = `All done! You scored ${score} out of 7. Enter your name and click OK to see the leader board.`;
@@ -146,11 +140,15 @@ function endQuiz() {
     enterButton.addEventListener("click", showHighScores)
   }
 
+  // Syncs the timer with the question display
 function syncTimer() {
   setTime();
   displayQuestion();
+  document.getElementById("table").setAttribute("style", "display: none");
+  document.getElementById("showScoresButton").setAttribute("style", "display: none")
 }
 
+  //initial function called when the page loads. Shows start button.
 function start(){
     var quizbox = document.getElementById("questions")
     quizbox.appendChild(startButton)
@@ -158,22 +156,24 @@ function start(){
     
   }
 
-start()
 
+  //pulls leaderboard from local storage, adds new score, stores new data as leaderboard in localstorage
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
 function addScore (userName, userScore) {
   leaderboard.push({userName, userScore});
   
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+  enterButton.removeEventListener("click", showHighScores);
 }
 
-
+// reads leaderboard data from local storage, 
 function displayScores() {
 
   var leaderboardElement = document.getElementById("highScores");
 
-  //leaderboardElement.innerHTML = "";
-
+  leaderboardElement.innerHTML = "";
+  leaderboard = leaderboard.sort((a, b) => b.userScore - a.userScore);
+  console.log(leaderboard)
   leaderboard.forEach((entry, index) => {
     var row = document.createElement("tr");
 
@@ -192,16 +192,17 @@ function displayScores() {
     leaderboardElement.appendChild(row);
   });
   
-  enterButton.removeEventListener("click", showHighScores);
+  
   var table = document.getElementById("table");
   table.setAttribute("style", "display: table");
   
 }
 
+//adds newest player score to leaderboard, then displays leaderboard from local storage
 function showHighScores() {
   addScore(nameInput.value, score);
   displayScores();
 }
 
-
+start()
 
