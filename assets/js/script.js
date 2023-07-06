@@ -31,6 +31,10 @@ var choiceElements = [
   document.getElementById("button4")
 ];
 
+var playAgain = document.createElement("button");
+playAgain.textContent = "Play Again"
+
+
 // sets time limit for quiz
 let timeLeft = 20;
 //begins the questions at index 0
@@ -138,6 +142,7 @@ function endQuiz() {
     questionElement.appendChild(nameInput);
     questionElement.appendChild(enterButton); 
     enterButton.addEventListener("click", showHighScores)
+    questionElement.appendChild(playAgain)
   }
 
   // Syncs the timer with the question display
