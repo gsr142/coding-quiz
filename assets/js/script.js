@@ -31,10 +31,10 @@ var choiceElements = [
   document.getElementById("button4")
 ];
 
+//create and add function to play again button 
 var playAgain = document.createElement("button");
 playAgain.textContent = "Play Again"
 playAgain.addEventListener("click", reload)
-
 function reload() {
   location.reload()
 }
@@ -182,8 +182,9 @@ function displayScores() {
   var leaderboardElement = document.getElementById("highScores");
 
   leaderboardElement.innerHTML = "";
+  //sorts leaderboard by score, in descending order
   leaderboard = leaderboard.sort((a, b) => b.userScore - a.userScore);
-  console.log(leaderboard)
+  //creates table rows and table data to display leaderboard
   leaderboard.forEach((entry, index) => {
     var row = document.createElement("tr");
 
@@ -204,6 +205,7 @@ function displayScores() {
   
   
   var table = document.getElementById("table");
+  //default display is 'none' so the table is hidden unless the user chooses to see it.
   table.setAttribute("style", "display: table");
   
 }
@@ -214,5 +216,6 @@ function showHighScores() {
   displayScores();
 }
 
+//initializes the code quiz
 start()
 

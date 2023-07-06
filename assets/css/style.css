@@ -69,6 +69,7 @@ tr {
     align-items: start;
 }
 
+/* hides table element by default*/
 table {
     display: none;
 }
