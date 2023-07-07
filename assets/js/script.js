@@ -39,7 +39,7 @@ function reload() {
   location.reload()
 }
 // sets time limit for quiz
-let timeLeft = 20;
+let timeLeft = 45;
 //begins the questions at index 0
 let questionIndex = 0;
 
@@ -81,6 +81,41 @@ var quiz = [
       choices: ["var x = 1", "const x = 1", "x = 1", "let x = 1"],
       correctAnswer: "button2"
     },
+    {
+      question: "What is the correct way to write a comment in JavaScript?",
+      choices: [`!\<-- This is a comment--\> `, `/* This is a comment */`, `// This is a comment`, `# This is a comment`],
+      correctAnswer: "button3"
+    },
+    {
+      question: "Which of the following is NOT a valid JavaScript loop?",
+      choices: ["for loop", "while loop", "repeat loop", "do-while loop"],
+      correctAnswer: "button3"
+    },
+    {
+      question: "What does the `===` operator in JavaScript represent?",
+      choices: ["Equality", "Assignment", "Logical OR", "Strict equality"],
+      correctAnswer: "button4"
+    },
+    {
+      question: "How do you write an if statement in JavaScript?",
+      choices: ["if (condition) { // code to execute }", "if { // code to execute } (condition)", "if [condition] then { // code to execute }", "if (condition) then { // code to execute }"],
+      correctAnswer: "button1"
+    },
+    {
+      question: "Which method is used to add an element at the end of an array in JavaScript?",
+      choices: ["push()", "add()", "append()", "insert()"],
+      correctAnswer: "button1"
+    },
+    {
+      question: "How do you access the length of an array in JavaScript?",
+      choices: ["array.size", "array.length", "array.count", "array.length()"],
+      correctAnswer: "button2"
+    },
+    {
+      question: "How do you check the data type of a variable in JavaScript?",
+      choices: ["typeof variableName", "variableName.typeOf()", "variableName.dataType", "typeOf variableName"],
+      correctAnswer: "button1"
+    }
     
   ];
 
@@ -120,7 +155,7 @@ function answerCounter (event) {
     if (userAnswer.id === currentQuestion.correctAnswer){
       score++;
     } else {
-      timeLeft = timeLeft - 5
+      timeLeft = timeLeft - 15
     }
     
     for (i = 0; i < choiceElements.length; i++) {
@@ -140,7 +175,7 @@ function answerCounter (event) {
   // Display finishing message and input box for user initials
 function endQuiz() {
     
-    questionElement.textContent = `All done! You scored ${score} out of 7. Enter your name and click OK to see the leader board.`;
+    questionElement.textContent = `All done! You scored ${score} out of 14. Enter your name and click OK to see the leader board.`;
     document.getElementById("answers").setAttribute("style", "display: none");
     questionElement.appendChild(nameInput);
     questionElement.appendChild(enterButton); 
